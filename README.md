@@ -2,9 +2,6 @@
 
 Uma página web interativa e educativa, projetada para ensinar adolescentes sobre os fundamentos da Inteligência Artificial de forma divertida e consciente. O projeto apresenta um quiz estilo "missões" que aborda temas como segurança online, privacidade, _deepfakes_ e pensamento crítico.
 
-![Banner do Jogo](https://i.imgur.com/r3uL5A7.png)
-_O R-42, seu guia na jornada pela IA._
-
 ---
 
 ## 🚀 Funcionalidades
