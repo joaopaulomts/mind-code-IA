@@ -50,6 +50,53 @@ let shuffledQuestions, currentQuestionIndex;
 let score = 0;
 
 const questions = [
+  // Privacy Questions
+  {
+    question: "Você está conversando com um chatbot amigável. Ele pergunta seu nome completo e onde você estuda para 'personalizar sua experiência'. O que você faz?",
+    answers: [
+      { text: "Informa os dados, pois ele é amigável.", correct: false },
+      { text: "Inventa um nome e escola para continuar.", correct: false },
+      { text: "Recusa-se a fornecer e entende que dados pessoais são sensíveis.", correct: true },
+    ],
+    explanation: "Correto! Nunca compartilhe dados pessoais como nome completo, endereço, ou escola com uma IA. Trate-a como um estranho na internet. Sua privacidade vem primeiro."
+  },
+  {
+    question: "Qual dos exemplos abaixo é um 'dado pessoal sensível' que você NUNCA deve compartilhar com uma IA?",
+    answers: [
+      { text: "Sua cor favorita ou o nome do seu pet.", correct: false },
+      { text: "O número do seu CPF ou o da sua família.", correct: true },
+      { text: "Sua opinião sobre um filme ou uma música.", correct: false },
+    ],
+    explanation: "Exato! Documentos como CPF, RG, passaporte ou senhas são informações críticas. Vazar esses dados pode levar a fraudes e roubo de identidade. Proteja-os a todo custo."
+  },
+  {
+    question: "Por que um aplicativo de IA pediria acesso aos seus contatos, microfone ou localização, mesmo que não precise disso para funcionar?",
+    answers: [
+      { text: "Para coletar o máximo de dados possível, que podem ser vendidos ou usados para publicidade.", correct: true },
+      { text: "Para garantir que o aplicativo funcione melhor para você.", correct: false },
+      { text: "Porque é um procedimento padrão de segurança.", correct: false },
+    ],
+    explanation: "Isso mesmo. Muitos apps 'gratuitos' lucram com a venda de dados. Sempre questione as permissões que um aplicativo solicita e negue acesso ao que não for essencial para sua função."
+  },
+  {
+    question: "Você usa uma IA para gerar uma imagem. Quais informações no 'prompt' podem, indiretamente, revelar dados sobre você?",
+    answers: [
+      { text: "'Crie um cachorro surfando em uma onda gigante'.", correct: false },
+      { text: "'Crie uma logo para a 'Escola Estadual Vila Maria, turma 3B''.", correct: true },
+      { text: "'Desenhe um castelo no estilo de Van Gogh'.", correct: false },
+    ],
+    explanation: "Boa observação! Mesmo que não seja seu nome, fornecer detalhes específicos como nome da escola, bairro ou locais que você frequenta pode expor sua localização e rotina."
+  },
+  {
+    question: "Qual é a forma mais segura de interagir com uma IA online?",
+    answers: [
+      { text: "Usando seu e-mail principal e nome real para se cadastrar.", correct: false },
+      { text: "Compartilhando apenas informações gerais e não pessoais, como se estivesse em um fórum público.", correct: true },
+      { text: "Contando seus segredos, pois a IA não pode contar para ninguém.", correct: false },
+    ],
+    explanation: "Perfeito! A regra de ouro é: não escreva em um prompt nada que você não escreveria em um outdoor. As conversas podem ser armazenadas e analisadas, então mantenha a comunicação impessoal e segura."
+  },
+  // Technical LLM Questions
   {
     question: "As IAs de conversa, como eu, são chamadas de LLMs. O que significa essa sigla?",
     answers: [
@@ -195,11 +242,11 @@ function showResult() {
     progressBarContainer.classList.add("hidden");
 
     let title, text;
-    if(score === 5) {
+    if(score >= 9) {
         title = "Parabéns, Mestre da IA! 🏆";
-        text = `Você acertou ${score} de ${questions.length} desafios e provou que entende como a IA funciona!`;
+        text = `Você acertou ${score} de ${questions.length} desafios e provou que sabe usar a IA com sabedoria e segurança!`;
         robotTextElement.innerText = "Uau! Você é um verdadeiro mestre da IA! 🤩";
-    } else if (score >= 3) {
+    } else if (score >= 6) {
         title = "Bom trabalho, Herói Digital! ⚡";
         text = `Você acertou ${score} de ${questions.length} desafios. Você está no caminho certo para dominar a IA.`;
         robotTextElement.innerText = "Belo trabalho! Continue aprendendo. 👍";
