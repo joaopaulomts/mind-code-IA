@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
 body {
   margin: 0;
-  font-family: "Trebuchet MS", sans-serif;
+  font-family: 'Poppins', sans-serif; /* Alterado para Poppins */
+  font-size: 1.1em; /* Aumentado o tamanho da fonte base */
   background: linear-gradient(135deg, #0a0017, #180033, #30006b);
   color: #fff;
   overflow-x: hidden;
@@ -34,13 +37,13 @@ header {
 }
 
 header h1 {
-  font-size: 50px;
+  font-size: 3.2em; /* Ajustado para ser maior */
   color: #bb86ff;
   text-shadow: 0 0 25px #d57bff;
 }
 
 header p {
-  font-size: 20px;
+  font-size: 1.2em; /* Ajustado para ser maior */
   opacity: 0.9;
 }
 
@@ -61,17 +64,61 @@ header p {
   border-radius: 15px;
   border: 2px solid #9f5dff;
   box-shadow: 0 0 20px #9f5dff55;
+  position: relative; /* Necessário para o pseudo-elemento */
+  overflow: hidden; /* Garante que o selo não saia pra fora */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mission:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px #9f5dff77;
 }
 
 .mission h2 {
+  font-size: 1.8em; /* Ajustado para ser maior */
   color: #e6b2ff;
   text-shadow: 0 0 10px #e6b2ff;
+  display: flex;
+  align-items: center;
+}
+
+.mission-icon {
+  font-size: 1.5em;
+  margin-right: 15px;
+  display: inline-block;
+  background: #00000033;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
 }
 
 .mission p {
-  font-size: 17px;
-  line-height: 1.6;
+  font-size: 1em; /* Baseado no novo body font-size */
+  line-height: 1.7; /* Aumentado para melhor leitura */
 }
+
+/* Missão concluída */
+.mission.mission-completed {
+  border-color: #00ffaa;
+  box-shadow: 0 0 25px #00ffaa88;
+}
+
+.mission.mission-completed::after {
+  content: 'Concluída! 🎉';
+  position: absolute;
+  top: 15px;
+  right: -50px;
+  background: #00ffaa;
+  color: #0a0017;
+  padding: 5px 50px;
+  font-weight: bold;
+  font-size: 0.9em;
+  transform: rotate(45deg);
+  box-shadow: 0 0 10px #00ffaa;
+}
+
 
 /* ---------- ROBÔ MASCOTE ---------- */
 .robot-box {
@@ -82,111 +129,31 @@ header p {
 .robot-img {
   width: 180px;
   filter: drop-shadow(0 0 15px #c77dff);
+  animation: float 6s infinite ease-in-out alternate;
 }
 
 #robot-text {
   margin-top: 15px;
-  font-size: 20px;
+  font-size: 1.2em; /* Ajustado para ser maior */
   color: #e6b2ff;
   text-shadow: 0 0 12px #e6b2ff;
   min-height: 60px;
+  transition: color 0.3s ease;
 }
 
-/* ---------- LINHA DO TEMPO ---------- */
-.timeline {
-  border-left: 3px solid #b47aff;
-  margin: 30px 0;
-  padding-left: 25px;
-}
-
-.timeline-item {
-  margin-bottom: 25px;
-}
-
-.timeline-item span {
-  font-size: 14px;
-  opacity: 0.7;
-}
-
-.timeline-item p {
-  margin: 5px 0 0;
-}
-
-/* ---------- MINI QUIZ ---------- */
-.quiz {
-  margin-top: 40px;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 20px 25px;
+/* ---------- QUIZ DAS MISSÕES ---------- */
+.quiz-container {
+  margin-top: 30px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
   border-radius: 10px;
-  border: 2px solid #bb86ff;
+  border-top: 2px solid #9f5dff;
 }
 
-.quiz button {
-  background: #bb86ff;
-  border: none;
-  padding: 12px 20px;
-  border-radius: 10px;
-  margin-top: 15px;
-  color: white;
-  cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
-}
-
-.quiz button:hover {
-  background: #d29dff;
-}
-
-/* ---------- QR CODE FINAL ---------- */
-.qr-box {
-  margin-top: 60px;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 40px;
-  text-align: center;
-  border-radius: 15px;
-  border: 2px solid #d57bff;
-  box-shadow: 0 0 25px #d57bff88;
-}
-
-.qr-box img {
-  width: 250px;
-  border-radius: 10px;
-  border: 3px solid #d57bff;
-  margin-top: 10px;
-}
-
-/* ---------- JOGO DE MISSÕES ---------- */
-#game-container {
-  text-align: center;
-}
-
-#progress-bar-container {
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 10px;
-  margin: 20px 0;
-  border: 1px solid #bb86ff88;
-}
-
-#progress-bar {
-  width: 0%;
-  height: 20px;
-  background-color: #bb86ff;
-  border-radius: 10px;
-  transition: width 0.5s ease-in-out;
-}
-
-.hidden {
-  display: none;
-}
-
-.fade-in {
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.question {
+  font-size: 1.1em;
+  font-weight: 600; /* Usar weight do Poppins */
+  margin-bottom: 20px;
 }
 
 .btn-grid {
@@ -203,12 +170,13 @@ header p {
   padding: 15px 20px;
   color: white;
   cursor: pointer;
-  font-size: 16px;
-  transition: 0.3s;
+  font-size: 1em; /* Baseado no novo body font-size */
+  text-align: left;
+  transition: background 0.3s ease, transform 0.2s ease;
   outline: none;
 }
 
-.btn:hover {
+.btn:hover:not(:disabled) {
   background: #d29dff;
   transform: scale(1.03);
 }
@@ -223,32 +191,35 @@ header p {
   border-color: #e57373;
 }
 
-.btn.correct, .btn.wrong {
+.btn:disabled {
     color: white;
     pointer-events: none; /* Desativa cliques após a resposta */
-}
-
-#controls {
-    margin-top: 20px;
-}
-
-.hidden {
-  display: none;
+    opacity: 0.8;
 }
 
 .explanation-text {
-    grid-column: 1 / -1; /* Ocupa as duas colunas */
-    margin-top: 15px;
-    font-size: 16px;
-    color: #e6b2ff;
-    background: rgba(0,0,0,0.2);
-    padding: 10px;
-    border-radius: 5px;
+  grid-column: 1 / -1;
+  margin-top: 15px;
+  font-size: 0.95em; /* Ligeiramente menor que o texto normal, mas legível */
+  color: #e6b2ff;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  border-radius: 5px;
+  border-left: 4px solid #00ffaa;
+  line-height: 1.6;
 }
 
-#result-container h3{
-    color: #bb86ff;
-    text-shadow: 0 0 15px #d57bff;
+.fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* ---------- ÍCONES FLUTUANTES ---------- */
@@ -259,11 +230,4 @@ header p {
   animation: float 8s infinite ease-in-out alternate;
   filter: drop-shadow(0 0 5px #d57bff);
 }
-@keyframes float {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-40px);
-  }
-}
+/* Reusing float animation from robot-img */
