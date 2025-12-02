@@ -75,7 +75,7 @@ const missions = [
         { text: "Em apps de música, streaming e redes sociais.", correct: true },
         { text: "Apenas em laboratórios secretos.", correct: false },
       ],
-      explanation: "Exato! A IA já faz parte do nosso dia a dia, e entender isso é o primeiro passo para usá-la de forma consciente."
+      explanation: "A IA já está presente em nosso dia a dia, em apps de música, streaming e redes sociais. Entender isso é o primeiro passo para usá-la de forma consciente."
     }
   },
   {
@@ -89,7 +89,7 @@ const missions = [
         { text: "O nome do seu pet.", correct: true },
         { text: "Uma foto do seu RG.", correct: false },
       ],
-      explanation: "Correto! Dados como nome do pet ou cor favorita são menos arriscados, mas informações de contato e documentos são supersecretos!"
+      explanation: "Informações que não te identificam diretamente, como nome do pet ou cor favorita, são menos arriscadas. Já dados de contato e documentos jamais devem ser compartilhados."
     }
   },
    {
@@ -103,7 +103,7 @@ const missions = [
         { text: "Procura a mesma notícia em jornais e sites conhecidos antes de acreditar.", correct: true },
         { text: "Responde à IA com sua opinião.", correct: false },
       ],
-      explanation: "Isso mesmo! O poder de um Herói Digital está em checar os fatos e não deixar a desinformação se espalhar."
+      explanation: "O correto é sempre verificar informações em fontes confiáveis, como jornais e sites conhecidos, antes de acreditar ou compartilhar. Assim você ajuda a combater a desinformação."
     }
   },
   {
@@ -117,7 +117,7 @@ const missions = [
         { text: "Um viés (preconceito) nos dados com que a IA foi treinada.", correct: true },
         { text: "Um erro normal do sistema.", correct: false },
       ],
-      explanation: "Perfeito! Questionar e identificar vieses é fundamental para garantir que a IA seja uma ferramenta para um futuro mais justo."
+      explanation: "Uma IA aprende com os dados que recebe. Se os dados forem preconceituosos, a IA também será. Por isso, é fundamental identificar e questionar esses vieses para construirmos uma tecnologia mais justa."
     }
   },
   {
@@ -131,7 +131,7 @@ const missions = [
         { text: "É complicado. A questão dos direitos autorais sobre arte de IA ainda não está definida.", correct: true },
         { text: "Sim, desde que ninguém descubra.", correct: false },
       ],
-      explanation: "Exato! A ética e a lei nesse campo estão em evolução. Usar como inspiração é o caminho mais seguro e criativo."
+      explanation: "As leis sobre direitos autorais de criações por IA ainda estão em debate. Por isso, o uso mais seguro e ético é para inspiração, evitando o uso comercial ou se apresentar como o único autor."
     }
   },
   {
@@ -145,7 +145,7 @@ const missions = [
         { text: "Fazer um sistema que responde provas automaticamente.", correct: false },
         { text: "Gerar fofocas sobre seus colegas.", correct: false },
       ],
-      explanation: "Ótima escolha! Usar a IA para resolver problemas reais da comunidade é a marca de um verdadeiro inovador."
+      explanation: "A IA pode ser uma ferramenta poderosa para o bem, ajudando a resolver problemas reais em áreas como saúde, transporte e meio ambiente. O objetivo é usar a tecnologia para criar um impacto positivo na sociedade."
     }
   },
   {
@@ -159,7 +159,7 @@ const missions = [
         { text: "Ser criativo e saber resolver problemas complexos.", correct: true },
         { text: "Ser o mais rápido em digitar.", correct: false },
       ],
-      explanation: "Correto! A IA cuida dos dados; nós cuidamos da criatividade, da estratégia e de como usar esses dados da melhor forma."
+      explanation: "Na era da IA, habilidades humanas como criatividade, pensamento crítico e resolução de problemas complexos se tornam ainda mais valiosas. A IA processa os dados, e nós damos a direção estratégica e criativa."
     }
   },
   // Missões Técnicas (Simplificadas)
@@ -174,7 +174,7 @@ const missions = [
         { text: "'Crie a imagem de um gato preto com olhos verdes, sentado numa pilha de livros, em estilo de pintura a óleo.'", correct: true },
         { text: "'Gato.'", correct: false },
       ],
-      explanation: "Perfeito! Quanto mais detalhes e contexto você der no seu pedido, mais incrível e preciso será o resultado que a IA vai gerar."
+      explanation: "Um 'prompt' (pedido) bem-sucedido é claro e rico em detalhes. Quanto mais específico o contexto, o estilo e os elementos que você descrever, mais fiel ao seu desejo será o resultado gerado pela IA."
     }
   },
   {
@@ -188,7 +188,7 @@ const missions = [
         { text: "Ela tentou 'adivinhar' a resposta, mas acabou criando uma informação que parece real, mas é falsa.", correct: true },
         { text: "Ela acessou uma informação secreta.", correct: false },
       ],
-      explanation: "Isso! 'Alucinação' é o termo para quando a IA gera informações falsas. É por isso que a checagem de fatos é tão importante."
+      explanation: "Uma 'alucinação' de IA ocorre quando ela gera informações que parecem verdadeiras, mas são falsas. Ela não 'sabe' que está errada, apenas previu uma sequência de palavras que parecia fazer sentido. Por isso, checar fatos é crucial."
     }
   },
   {
@@ -202,12 +202,16 @@ const missions = [
         { text: "Todas usam uma lógica de 'adivinhar' a próxima parte de uma sequência (seja um pixel, nota ou palavra).", correct: true },
         { text: "Todas precisam de um supercomputador para funcionar.", correct: false },
       ],
-      explanation: "Exatamente! A base da IA generativa é a previsão de padrões, seja para qual for o tipo de conteúdo. Entender isso desmistifica a 'mágica'."
+      explanation: "A lógica por trás das IAs que geram texto, imagem ou som é a mesma: prever a próxima parte de uma sequência com base nos padrões que aprendeu. Seja a próxima palavra, o próximo pixel ou a próxima nota musical."
     }
   },
 ];
 
 // --- LÓGICA DO JOGO ---
+
+let correctAnswersCount = 0;
+let answeredQuestionsCount = 0;
+const totalQuestions = missions.length;
 
 function renderMissions() {
   const container = document.getElementById("missions-container");
@@ -260,15 +264,29 @@ function renderMissions() {
 
 function selectAnswer(e) {
     const selectedButton = e.target;
+    if (selectedButton.disabled) {
+        return;
+    }
+
+    answeredQuestionsCount++;
     const isCorrect = selectedButton.dataset.correct === "true";
     const answerGrid = selectedButton.parentElement;
     const missionEl = selectedButton.closest('.mission');
     
-    const missionTitle = missionEl.querySelector('h2').innerText.replace(`${missionEl.querySelector('.mission-icon').innerText} `, '');
-    const missionData = missions.find(m => m.title === missionTitle);
+    // Use ID for robust mission data retrieval
+    const missionIndex = parseInt(missionEl.id.split('-')[1]) - 1;
+    const missionData = missions[missionIndex];
+
+    // Defensive check
+    if (!missionData) {
+        console.error("Could not find mission data for element:", missionEl);
+        return;
+    }
+    
     const explanation = missionData.quiz.explanation;
 
     if (isCorrect) {
+        correctAnswersCount++;
         robotSay("correct");
         missionEl.classList.add("mission-completed");
     } else {
@@ -276,20 +294,54 @@ function selectAnswer(e) {
         selectedButton.classList.add("wrong");
     }
 
-    // Mostra qual era a resposta certa e desabilita os botões
+    // Disable all buttons and show the correct answer
     Array.from(answerGrid.children).forEach(button => {
-        if(button.dataset.correct === "true") {
-            button.classList.add("correct");
+        // Only act on buttons
+        if (button.tagName === 'BUTTON') {
+            if (button.dataset.correct === "true") {
+                button.classList.add("correct");
+            }
+            button.disabled = true; // Use disabled property
         }
-        button.removeEventListener('click', selectAnswer);
-        button.style.cursor = "default";
     });
 
-    // Adiciona o texto de explicação
+    // Add explanation text
     const explanationEl = document.createElement("p");
     explanationEl.innerText = `💡 ${explanation}`;
     explanationEl.classList.add("explanation-text", "fade-in");
+    
+    if (isCorrect) {
+        explanationEl.classList.add("correct");
+    } else {
+        explanationEl.classList.add("wrong");
+    }
+
     answerGrid.appendChild(explanationEl);
+
+    if (answeredQuestionsCount === totalQuestions) {
+        // Use a timeout to let the user see the last result
+        setTimeout(displayFinalResults, 1500);
+    }
+}
+
+function displayFinalResults() {
+    const resultsContainer = document.getElementById('final-results');
+    let title, message;
+
+    if (correctAnswersCount === totalQuestions) {
+        title = "Parabéns, Herói Digital Supremo! 🏆";
+        message = `Você acertou todas as ${totalQuestions} questões e provou ser um mestre da IA! Seu conhecimento é inspirador. Continue explorando e usando a tecnologia para o bem! ✨`;
+    } else {
+        title = "Parabéns, Herói Digital! 👍";
+        message = `Você completou a jornada e acertou ${correctAnswersCount} de ${totalQuestions} questões. Cada erro é um passo para o aprendizado. Continue curioso e atento no universo da IA!`;
+    }
+
+    resultsContainer.innerHTML = `
+        <h2 class="fade-in">${title}</h2>
+        <p class="fade-in">${message}</p>
+    `;
+    resultsContainer.style.display = 'block';
+    resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 
