@@ -72,8 +72,8 @@ const missions = [
       question: "Onde você já encontra IA hoje?",
       answers: [
         { text: "Apenas em filmes de ficção científica.", correct: false },
-        { text: "Em apps de música, streaming e redes sociais.", correct: true },
         { text: "Apenas em laboratórios secretos.", correct: false },
+        { text: "Em apps de música, streaming e redes sociais.", correct: true },
       ],
       explanation: "A IA já está presente em nosso dia a dia, em apps de música, streaming e redes sociais. Entender isso é o primeiro passo para usá-la de forma consciente."
     }
@@ -100,8 +100,8 @@ const missions = [
       question: "Uma IA te mostra uma foto de um político famoso dizendo algo polêmico. O que você faz?",
       answers: [
         { text: "Compartilha imediatamente, pois a imagem parece real.", correct: false },
-        { text: "Procura a mesma notícia em jornais e sites conhecidos antes de acreditar.", correct: true },
         { text: "Responde à IA com sua opinião.", correct: false },
+        { text: "Procura a mesma notícia em jornais e sites conhecidos antes de acreditar.", correct: true },
       ],
       explanation: "O correto é sempre verificar informações em fontes confiáveis, como jornais e sites conhecidos, antes de acreditar ou compartilhar. Assim você ajuda a combater a desinformação."
     }
@@ -141,8 +141,8 @@ const missions = [
     quiz: {
       question: "Qual destes é um bom exemplo de 'IA para o Bem'?",
       answers: [
-        { text: "Criar um app que otimiza rotas de ônibus para reduzir o trânsito.", correct: true },
         { text: "Fazer um sistema que responde provas automaticamente.", correct: false },
+        { text: "Criar um app que otimiza rotas de ônibus para reduzir o trânsito.", correct: true },
         { text: "Gerar fofocas sobre seus colegas.", correct: false },
       ],
       explanation: "A IA pode ser uma ferramenta poderosa para o bem, ajudando a resolver problemas reais em áreas como saúde, transporte e meio ambiente. O objetivo é usar a tecnologia para criar um impacto positivo na sociedade."
@@ -156,8 +156,8 @@ const missions = [
       question: "Qual habilidade se torna MAIS importante na era da IA?",
       answers: [
         { text: "Saber decorar muitas informações.", correct: false },
-        { text: "Ser criativo e saber resolver problemas complexos.", correct: true },
         { text: "Ser o mais rápido em digitar.", correct: false },
+        { text: "Ser criativo e saber resolver problemas complexos.", correct: true },
       ],
       explanation: "Na era da IA, habilidades humanas como criatividade, pensamento crítico e resolução de problemas complexos se tornam ainda mais valiosas. A IA processa os dados, e nós damos a direção estratégica e criativa."
     }
@@ -170,8 +170,8 @@ const missions = [
     quiz: {
       question: "Qual pedido (ou 'prompt') daria um resultado melhor para criar uma imagem?",
       answers: [
-        { text: "'Desenhe um gato.'", correct: false },
         { text: "'Crie a imagem de um gato preto com olhos verdes, sentado numa pilha de livros, em estilo de pintura a óleo.'", correct: true },
+        { text: "'Desenhe um gato.'", correct: false },
         { text: "'Gato.'", correct: false },
       ],
       explanation: "Um 'prompt' (pedido) bem-sucedido é claro e rico em detalhes. Quanto mais específico o contexto, o estilo e os elementos que você descrever, mais fiel ao seu desejo será o resultado gerado pela IA."
@@ -184,8 +184,8 @@ const missions = [
     quiz: {
       question: "Quando uma IA de texto 'alucina' e inventa uma informação, significa que:",
       answers: [
-        { text: "Ela ficou consciente e está sonhando.", correct: false },
         { text: "Ela tentou 'adivinhar' a resposta, mas acabou criando uma informação que parece real, mas é falsa.", correct: true },
+        { text: "Ela ficou consciente e está sonhando.", correct: false },
         { text: "Ela acessou uma informação secreta.", correct: false },
       ],
       explanation: "Uma 'alucinação' de IA ocorre quando ela gera informações que parecem verdadeiras, mas são falsas. Ela não 'sabe' que está errada, apenas previu uma sequência de palavras que parecia fazer sentido. Por isso, checar fatos é crucial."
@@ -199,8 +199,8 @@ const missions = [
       question: "O que as IAs que geram imagem, som e texto têm em comum?",
       answers: [
         { text: "Todas foram criadas pela mesma empresa.", correct: false },
-        { text: "Todas usam uma lógica de 'adivinhar' a próxima parte de uma sequência (seja um pixel, nota ou palavra).", correct: true },
         { text: "Todas precisam de um supercomputador para funcionar.", correct: false },
+        { text: "Todas usam uma lógica de 'adivinhar' a próxima parte de uma sequência (seja um pixel, nota ou palavra).", correct: true },
       ],
       explanation: "A lógica por trás das IAs que geram texto, imagem ou som é a mesma: prever a próxima parte de uma sequência com base nos padrões que aprendeu. Seja a próxima palavra, o próximo pixel ou a próxima nota musical."
     }
@@ -212,6 +212,24 @@ const missions = [
 let correctAnswersCount = 0;
 let answeredQuestionsCount = 0;
 const totalQuestions = missions.length;
+
+function shuffle(array) {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex != 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
 
 function renderMissions() {
   const container = document.getElementById("missions-container");
@@ -247,7 +265,9 @@ function renderMissions() {
     const answersEl = document.createElement("div");
     answersEl.classList.add("btn-grid");
 
-    mission.quiz.answers.forEach(answer => {
+    const shuffledAnswers = shuffle(mission.quiz.answers);
+
+    shuffledAnswers.forEach(answer => {
         const button = document.createElement("button");
         button.innerText = answer.text;
         button.classList.add("btn");
