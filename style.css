@@ -265,3 +265,40 @@ header p {
     max-width: 600px;
     margin: 15px auto 0;
 }
+
+/* ---------- PLACAR DE PONTOS ---------- */
+.score-display {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid #bb86ff;
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #e6b2ff;
+  z-index: 10;
+  box-shadow: 0 0 15px #000;
+}
+
+/* ---------- FINAL BOSS ---------- */
+.final-boss-container {
+  text-align: center;
+  padding: 50px 20px;
+  margin: 40px auto;
+  max-width: 800px;
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 15px;
+  border: 2px solid #d57bff;
+  box-shadow: 0 0 30px #d57bff88;
+  position: relative;
+  z-index: 1;
+}
+
+.final-boss-container h2 {
+    font-size: 2.5em;
+    color: #ff8c00; /* Laranja escuro para o chefão */
+    text-shadow: 0 0 20px #ff8c00;
+    margin-bottom: 25px;
+}
