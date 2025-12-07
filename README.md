@@ -1,4 +1,4 @@
-# Game.IA, um jogo para conscientizar o uso da IA para jovens e adolescentes!
+# Mind.Code, um jogo para conscientizar o uso da IA para jovens e adolescentes!
 
 Uma página web interativa e educativa, projetada para ensinar adolescentes sobre os fundamentos da Inteligência Artificial de forma divertida e consciente. O projeto apresenta um quiz estilo "missões" que aborda temas como segurança online, privacidade, _deepfakes_ e pensamento crítico.
 
